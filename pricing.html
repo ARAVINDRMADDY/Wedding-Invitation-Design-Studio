@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment & Pricing - Design Studio</title>
+  <link rel="icon" type="image/jpeg" href="images/invitation_logo.jpg">
+  <meta name="description" content="View our transparent pricing and bespoke wedding stationery packages. From digital printing to luxury letterpress and foil.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = { 
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            rosegold: '#B76E79',
+            'rosegold-hover': '#9f5c66',
+            'dark-gray': '#3A3A3A',
+            'soft-pink': '#FFF1F0',
+            white: '#FFFFFF'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    [dir="rtl"] { direction: rtl; }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeInUp 0.8s ease-out; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    
+    /* Toggle Switch Styles */
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #B76E79;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #B76E79;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased transition-colors duration-300 bg-white dark:bg-dark-gray flex flex-col min-h-screen">
+
+  <nav class="bg-white/80 dark:bg-[#2A2A2A]/80 backdrop-blur-lg fixed w-full top-0 z-50 shadow-sm border-b border-gray-200 dark:border-white/10 transition-all duration-300">
+    <div class="max-w-[1400px] mx-auto nav-container px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+
+        <div class="flex-shrink-0">
+          <a href="index.html" class="flex items-center space-x-3">
+            <div class="flex flex-col">
+              <span class="text-2xl font-bold text-dark-gray dark:text-white nav-logo-text">Design <span class="text-rosegold">Studio</span></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="hidden xl:flex items-center justify-center flex-1 nav-menu-container mx-4">
+          <div class="flex items-center space-x-0.5 lg:space-x-2">
+
+            <div class="relative group">
+              <button class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5">
+                <span class="text-sm">Home</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="absolute left-0 mt-2 w-48 bg-white dark:bg-[#222] border border-gray-100 dark:border-gray-700 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50 overflow-hidden">
+                <a href="index.html" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold transition duration-300">Home Page 1</a>
+                <a href="home-2.html" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold transition duration-300">Home Page 2</a>
+              </div>
+            </div>
+
+            <a href="about.html" class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5 text-sm">About</a>
+            <a href="collections.html" class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5 text-sm">Collections</a>
+            <a href="designers.html" class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5 text-sm">Designers</a>
+            
+            <a href="pricing.html" class="nav-link text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg bg-soft-pink/50 dark:bg-white/5 text-sm">Pricing</a>
+            
+            <a href="inspiration.html" class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5 text-sm">Inspiration</a>
+            <a href="contact.html" class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5 text-sm">Contact</a>
+
+            <div class="relative group">
+              <button class="nav-link text-gray-700 dark:text-gray-200 hover:text-rosegold dark:hover:text-rosegold font-medium transition duration-300 flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/5">
+                <span class="text-sm">Client Portal</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="absolute right-0 mt-2 w-56 bg-white dark:bg-[#222] border border-gray-100 dark:border-gray-700 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50 overflow-hidden">
+                <a href="admin-dashboard.html" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold transition duration-300">
+                  <i class="fas fa-user-shield mr-2"></i>Admin Dashboard
+                </a>
+                <a href="user-dashboard.html" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold transition duration-300">
+                  <i class="fas fa-user mr-2"></i>Couple Dashboard
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="hidden xl:flex items-center space-x-2">
+          <a href="login.html" class="nav-button text-gray-700 dark:text-gray-200 hover:text-rosegold px-3 py-2 rounded-lg font-medium transition duration-300 text-sm flex items-center space-x-1">
+            <span>Login</span>
+          </a>
+          <a href="register.html" class="nav-button bg-rosegold hover:bg-rosegold-hover text-white px-5 py-2.5 rounded-full font-medium transition duration-300 text-sm flex items-center space-x-2 shadow-md whitespace-nowrap">
+            <i class="fas fa-user-plus"></i>
+            <span>Register</span>
+          </a>
+
+          <button id="rtl-toggle" class="nav-icon-button w-10 h-10 rounded-full bg-soft-pink/50 dark:bg-white/10 hover:bg-soft-pink dark:hover:bg-white/20 flex items-center justify-center text-dark-gray dark:text-white transition duration-300 ml-2 text-xs font-semibold" title="Toggle RTL">
+            RTL
+          </button>
+
+          <button id="theme-toggle" class="nav-icon-button w-10 h-10 rounded-full bg-soft-pink/50 dark:bg-white/10 hover:bg-soft-pink dark:hover:bg-white/20 flex items-center justify-center text-dark-gray dark:text-white transition duration-300 ml-2" title="Toggle Theme">
+            <i class="fas fa-moon dark:hidden text-sm"></i>
+            <i class="fas fa-sun hidden dark:inline text-sm"></i>
+          </button>
+        </div>
+
+        <div class="xl:hidden flex items-center">
+          <button id="mobile-menu-button" class="text-dark-gray dark:text-gray-200 hover:text-rosegold focus:outline-none p-3 rounded-lg hover:bg-soft-pink/50 dark:hover:bg-white/10 transition duration-300">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+              <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden bg-white/95 dark:bg-[#2A2A2A]/95 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 shadow-xl">
+      <div class="px-4 pt-2 pb-6 space-y-1 max-h-[calc(100vh-80px)] overflow-y-auto">
+
+        <div>
+          <button id="mobile-home-dropdown" class="w-full flex items-center justify-between px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 rounded-lg transition duration-300">
+            <span class="text-sm font-medium">Home</span>
+            <i class="fas fa-chevron-down text-xs transition-transform duration-300" id="mobile-home-icon"></i>
+          </button>
+          <div id="mobile-home-menu" class="hidden pl-4 mt-1 space-y-1">
+            <a href="index.html" class="block px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm">Home Page 1</a>
+            <a href="home-2.html" class="block px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm">Home Page 2</a>
+          </div>
+        </div>
+
+        <a href="about.html" class="block px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm font-medium">About</a>
+        <a href="collections.html" class="block px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm font-medium">Collections</a>
+        <a href="designers.html" class="block px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm font-medium">Designers</a>
+        <a href="pricing.html" class="block px-4 py-3 text-rosegold bg-soft-pink/50 dark:bg-white/5 rounded-lg transition duration-300 text-sm font-medium">Pricing</a>
+        <a href="inspiration.html" class="block px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm font-medium">Inspiration</a>
+        <a href="contact.html" class="block px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm font-medium">Contact</a>
+
+        <div>
+          <button id="mobile-dashboard-dropdown" class="w-full flex items-center justify-between px-4 py-3 text-dark-gray dark:text-gray-200 hover:bg-soft-pink/50 dark:hover:bg-white/5 rounded-lg transition duration-300">
+            <span class="text-sm font-medium">Client Portal</span>
+            <i class="fas fa-chevron-down text-xs transition-transform duration-300" id="mobile-dashboard-icon"></i>
+          </button>
+          <div id="mobile-dashboard-menu" class="hidden pl-4 mt-1 space-y-1">
+            <a href="admin-dashboard.html" class="block px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm">
+              <i class="fas fa-user-shield mr-2"></i>Admin Dashboard
+            </a>
+            <a href="user-dashboard.html" class="block px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-soft-pink/50 dark:hover:bg-white/5 hover:text-rosegold rounded-lg transition duration-300 text-sm">
+              <i class="fas fa-user mr-2"></i>Couple Dashboard
+            </a>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-200 dark:border-white/10 mt-3 space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <a href="login.html" class="block w-full bg-soft-pink/50 dark:bg-white/5 hover:bg-soft-pink dark:hover:bg-white/10 text-dark-gray dark:text-white px-4 py-3 rounded-lg font-medium text-center transition duration-300 text-sm">
+              Login
+            </a>
+            <a href="register.html" class="block w-full bg-rosegold hover:bg-rosegold-hover text-white px-4 py-3 rounded-lg font-medium text-center transition duration-300 shadow-md text-sm">
+              Register
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <button id="mobile-rtl-toggle" class="bg-soft-pink/50 dark:bg-white/5 hover:bg-soft-pink dark:hover:bg-white/10 text-dark-gray dark:text-white px-4 py-3 rounded-lg font-medium text-center transition duration-300 text-sm">
+              <i class="fas fa-language mr-2"></i>RTL
+            </button>
+            <button id="mobile-theme-toggle" class="bg-soft-pink/50 dark:bg-white/5 hover:bg-soft-pink dark:hover:bg-white/10 text-dark-gray dark:text-white px-4 py-3 rounded-lg font-medium text-center transition duration-300 text-sm">
+              <i class="fas fa-moon mr-2 dark:hidden"></i>
+              <i class="fas fa-sun mr-2 hidden dark:inline"></i>
+              <span>Theme</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    
+    <section class="relative min-h-screen flex flex-col justify-center pt-20 overflow-hidden transition-colors duration-300">
+      
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/photo-1710961716412-5e246a002e99.avif');"></div>
+      <div class="absolute inset-0 bg-dark-gray/70 z-0"></div>
+
+      <div class="absolute top-0 right-0 w-64 h-64 bg-rosegold/20 rounded-full blur-3xl z-0"></div>
+      <div class="absolute bottom-0 left-0 w-80 h-80 bg-white/50 dark:bg-rosegold/10 rounded-full blur-3xl z-0"></div>
+      
+      <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-fade-in">
+        <span class="text-rosegold font-bold tracking-wider uppercase text-sm mb-4 block drop-shadow-sm"></span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+          Investment & <span class="text-rosegold">Packages</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto mb-10 drop-shadow-md font-medium">
+          Whether you're looking for simple elegance or opulent, multi-piece suites, we have curated packages to suit every beautiful celebration.
+        </p>
+
+        <div class="flex items-center justify-center space-x-4 mb-8">
+          <span class="text-white font-bold drop-shadow-md">Quantity: 100</span>
+          <div class="relative inline-block w-14 mr-2 align-middle select-none transition duration-200 ease-in drop-shadow-md">
+            <input type="checkbox" name="toggle" id="pricing-toggle" class="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-transform duration-300 z-10"/>
+            <label for="pricing-toggle" class="toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 cursor-pointer"></label>
+          </div>
+          <span class="text-white font-bold drop-shadow-md">Quantity: 150</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gray-50 dark:bg-dark-gray transition-colors duration-300 relative z-20 -mt-10 rounded-t-[3rem]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+          
+          <div class="bg-white dark:bg-[#222] rounded-3xl p-8 shadow-lg border border-gray-100 dark:border-gray-800 flex flex-col hover:-translate-y-2 transition-transform duration-300">
+            <div class="w-12 h-12 bg-soft-pink dark:bg-white/5 rounded-xl flex items-center justify-center text-rosegold mb-6">
+              <i class="fas fa-leaf text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-dark-gray dark:text-white mb-2">The Essential</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 border-b border-gray-100 dark:border-white/10 pb-6">Perfect for simple, modern celebrations requiring an elegant but streamlined introduction.</p>
+            
+            <div class="mb-6 flex items-baseline">
+              <span class="text-4xl font-extrabold text-dark-gray dark:text-white" id="price-essential">$650</span>
+              <span class="text-gray-500 dark:text-gray-400 text-sm ml-2">/ base</span>
+            </div>
+            
+            <ul class="space-y-4 mb-8 flex-grow">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">2-Piece Suite (Invitation & Envelope)</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">Premium Digital Flat Printing</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">110lb Classic Matte Paper</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">2 Rounds of Design Revisions</span>
+              </li>
+            </ul>
+            
+            <a href="contact.html" class="w-full block text-center py-3 px-4 bg-rosegold/10 text-rosegold hover:bg-rosegold hover:text-white rounded-xl font-bold transition duration-300">
+              Select Essential
+            </a>
+          </div>
+
+          <div class="bg-dark-gray dark:bg-[#1a1a1a] rounded-3xl p-8 shadow-2xl border-2 border-rosegold transform lg:scale-105 flex flex-col relative z-10">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-rosegold text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-md">
+              Most Popular
+            </div>
+            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-rosegold mb-6">
+              <i class="fas fa-crown text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">The Classic</h3>
+            <p class="text-gray-400 text-sm mb-6 border-b border-white/10 pb-6">The traditional suite offering tactile elegance and comprehensive event details.</p>
+            
+            <div class="mb-6 flex items-baseline">
+              <span class="text-4xl font-extrabold text-white" id="price-classic">$1,450</span>
+              <span class="text-gray-400 text-sm ml-2">/ base</span>
+            </div>
+            
+            <ul class="space-y-4 mb-8 flex-grow">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-300 text-sm">4-Piece Suite (Invite, RSVP, 2 Envelopes)</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-300 text-sm">1-Color Traditional Letterpress</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-300 text-sm">110lb Premium Cotton Cardstock</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-300 text-sm">Custom Monogram Creation</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-300 text-sm">Return Address Printing Included</span>
+              </li>
+            </ul>
+            
+            <a href="contact.html" class="w-full block text-center py-3 px-4 bg-rosegold text-white hover:bg-rosegold-hover rounded-xl font-bold shadow-lg shadow-rosegold/30 transition duration-300">
+              Select Classic
+            </a>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] rounded-3xl p-8 shadow-lg border border-gray-100 dark:border-gray-800 flex flex-col hover:-translate-y-2 transition-transform duration-300">
+            <div class="w-12 h-12 bg-soft-pink dark:bg-white/5 rounded-xl flex items-center justify-center text-rosegold mb-6">
+              <i class="fas fa-gem text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-dark-gray dark:text-white mb-2">The Heirloom</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 border-b border-gray-100 dark:border-white/10 pb-6">A luxurious, fully custom artistic experience built to impress from the moment of unboxing.</p>
+            
+            <div class="mb-6 flex items-baseline">
+              <span class="text-4xl font-extrabold text-dark-gray dark:text-white" id="price-heirloom">$2,800</span>
+              <span class="text-gray-500 dark:text-gray-400 text-sm ml-2">/ base</span>
+            </div>
+            
+            <ul class="space-y-4 mb-8 flex-grow">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">5-Piece Suite + Custom Details Card</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">Letterpress & Hot Foil Stamping Combo</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">Double Thick 220lb Cotton Paper</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">Custom Venue Watercolor Illustration</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-rosegold mt-1 mr-3"></i>
+                <span class="text-gray-600 dark:text-gray-400 text-sm">Full Guest Envelope Calligraphy</span>
+              </li>
+            </ul>
+            
+            <a href="contact.html" class="w-full block text-center py-3 px-4 bg-rosegold/10 text-rosegold hover:bg-rosegold hover:text-white rounded-xl font-bold transition duration-300">
+              Select Heirloom
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white dark:bg-[#1f1f1f] border-t border-gray-100 dark:border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="text-rosegold font-bold tracking-widest uppercase text-sm mb-2 block">The Canvas</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-dark-gray dark:text-white mb-4">Curated Paper Selection</h2>
+          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            A beautiful design is only as good as the canvas it rests upon. Elevate your suite by choosing from our hand-sourced, archival-quality papers and materials.
+          </p>
+        </div>
+
+        <div class="w-full h-64 md:h-96 mb-16 rounded-[2rem] overflow-hidden shadow-xl relative group">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+          <img src="https://images.unsplash.com/photo-1603807008857-ad66b70431aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Curated Fine Papers Stack" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 z-20">
+             <p class="text-white font-serif text-xl italic drop-shadow-md">"Tactile luxury you can feel in every fiber."</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          
+          <div class="flex gap-6 items-start group">
+            <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-md flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1598520106830-8c45c2035460?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Handmade Cotton Rag Texture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-bold text-dark-gray dark:text-white">Handmade Cotton Rag</h3>
+                <span class="bg-soft-pink dark:bg-white/10 text-rosegold text-xs font-bold px-2 py-1 rounded">+ $250 base</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                Crafted by hand using centuries-old techniques, this 100% cotton paper features gorgeous, organic deckled edges. Perfect for a romantic, old-world aesthetic.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-6 items-start group">
+            <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-md flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1600861194942-f883de0dfe96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Classic Eggshell Matte" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-bold text-dark-gray dark:text-white">Classic Eggshell Matte</h3>
+                <span class="bg-soft-pink dark:bg-white/10 text-gray-500 text-xs font-bold px-2 py-1 rounded">Included</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                Our standard luxury stock. A substantial 120lb weight with a subtle, tactile tooth. It provides crisp, clean printing for modern and minimalist suites.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-6 items-start group">
+            <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-md flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1532153955177-f59af40d6472?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="European Color Stock" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-bold text-dark-gray dark:text-white">European Color Stock</h3>
+                <span class="bg-soft-pink dark:bg-white/10 text-rosegold text-xs font-bold px-2 py-1 rounded">+ $150 base</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                Deeply saturated, archival-quality colored papers sourced from historic mills in Italy and France. Ideal for dramatic foil stamping or white ink printing.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-6 items-start group">
+            <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-md flex-shrink-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+               <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Ethereal Vellum Paper" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-bold text-dark-gray dark:text-white">Ethereal Vellum</h3>
+                <span class="bg-soft-pink dark:bg-white/10 text-rosegold text-xs font-bold px-2 py-1 rounded">+ $180 base</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                A semi-translucent, frosted paper that adds a modern, layered effect to your invitations. Can be printed with full color, white ink, or brilliant foil.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-soft-pink/20 dark:bg-[#151515]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-dark-gray dark:text-white mb-4">The Embellishment Bar</h2>
+          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            These are the details that transform a beautiful invitation into an unforgettable unboxing experience. Add these à la carte options to any package.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-stamp text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Custom Wax Seals</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Hand-poured with your monogram or floral crest.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$1.50</span> <span class="text-xs text-gray-500">/ each</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-ribbon text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Silk Ribbons</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Hand-dyed, frayed edge silk ribbons tied around the suite.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$2.25</span> <span class="text-xs text-gray-500">/ each</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-envelope-open-text text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Envelope Liners</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Custom printed floral or solid color die-cut liners.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$2.50</span> <span class="text-xs text-gray-500">/ each</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-pen-fancy text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Guest Calligraphy</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Pointed pen calligraphy for outer mailing envelopes.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$4.00</span> <span class="text-xs text-gray-500">/ each</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-paint-brush text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Venue Sketch</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Custom watercolor or line-art sketch of your venue.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$150</span> <span class="text-xs text-gray-500">flat fee</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-map-marked-alt text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Custom Maps</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Illustrated map card highlighting your weekend events.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$200</span> <span class="text-xs text-gray-500">flat fee</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-layer-group text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">Vellum Wraps</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Translucent vellum folded around your invitation stack.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$1.75</span> <span class="text-xs text-gray-500">/ each</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#222] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 text-center flex flex-col justify-between">
+            <div>
+              <div class="w-16 h-16 mx-auto bg-gray-50 dark:bg-dark-gray rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-box-open text-2xl text-rosegold"></i>
+              </div>
+              <h4 class="font-bold text-dark-gray dark:text-white mb-1">White Glove Service</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">We stuff, seal, stamp, and mail everything for you.</p>
+            </div>
+            <div class="border-t border-gray-100 dark:border-white/10 pt-3">
+              <span class="text-lg font-bold text-rosegold">$1.50</span> <span class="text-xs text-gray-500">/ per suite</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white dark:bg-[#1a1a1a] border-t border-gray-100 dark:border-white/5">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-dark-gray dark:text-white text-center mb-12">The Payment Timeline</h2>
+        
+        <div class="relative">
+          <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-100 dark:bg-gray-800 -translate-y-1/2 z-0"></div>
+          
+          <div class="grid md:grid-cols-3 gap-8 relative z-10">
+            
+            <div class="bg-white dark:bg-[#222] border-2 border-soft-pink dark:border-gray-700 rounded-2xl p-8 text-center relative hover:border-rosegold transition-colors duration-300">
+              <div class="w-8 h-8 bg-rosegold rounded-full absolute -top-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-white font-bold text-sm">1</div>
+              <h4 class="text-xl font-bold text-dark-gray dark:text-white mb-2">The Retainer</h4>
+              <p class="text-rosegold font-bold mb-4">50% of Estimate</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Due upon signing the contract. This non-refundable deposit secures your spot on our design calendar and begins the initial proofing phase.</p>
+            </div>
+
+            <div class="bg-white dark:bg-[#222] border-2 border-soft-pink dark:border-gray-700 rounded-2xl p-8 text-center relative hover:border-rosegold transition-colors duration-300">
+              <div class="w-8 h-8 bg-rosegold rounded-full absolute -top-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-white font-bold text-sm">2</div>
+              <h4 class="text-xl font-bold text-dark-gray dark:text-white mb-2">Production</h4>
+              <p class="text-rosegold font-bold mb-4">30% of Estimate</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Due upon final approval of your digital mockups. Once paid, plates are ordered and your designs are sent to our letterpress and printing team.</p>
+            </div>
+
+            <div class="bg-white dark:bg-[#222] border-2 border-soft-pink dark:border-gray-700 rounded-2xl p-8 text-center relative hover:border-rosegold transition-colors duration-300">
+              <div class="w-8 h-8 bg-rosegold rounded-full absolute -top-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center text-white font-bold text-sm">3</div>
+              <h4 class="text-xl font-bold text-dark-gray dark:text-white mb-2">Final Balance</h4>
+              <p class="text-rosegold font-bold mb-4">Remaining 20%</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Due prior to shipping. This invoice includes shipping costs and any final adjustments or additions made during the production phase.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-dark-gray text-white relative overflow-hidden">
+      <div class="absolute -left-32 -top-32 w-96 h-96 bg-rosegold/20 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+        
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-8">Pricing Questions</h2>
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-lg font-bold text-rosegold mb-2"><i class="fas fa-question-circle mr-2 text-sm"></i> Do you have a minimum spend?</h4>
+              <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-white/20 pl-4">Our minimum order quantity for printing is 50 suites. Due to the intensive setup process for letterpress and foil, smaller quantities are not cost-effective. Remember to count addresses, not guests!</p>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-rosegold mb-2"><i class="fas fa-question-circle mr-2 text-sm"></i> Are envelopes included?</h4>
+              <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-white/20 pl-4">Yes, all of our base packages include a high-quality main envelope in your choice of standard colors. Return address printing is also included on the back flap.</p>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-rosegold mb-2"><i class="fas fa-question-circle mr-2 text-sm"></i> How much is custom artwork?</h4>
+              <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-white/20 pl-4">Custom venue sketches start at $150, and custom watercolor crests start at $200. Once created, you own the artwork and can use it on day-of stationery like menus and signs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-10 md:p-14 rounded-3xl text-center shadow-2xl">
+          <i class="far fa-paper-plane text-5xl text-rosegold mb-6"></i>
+          <h3 class="text-3xl font-bold mb-4">Request a Custom Proposal</h3>
+          <p class="text-gray-300 mb-8 leading-relaxed">
+            Every wedding is unique, and so is every quote. Reach out with your date, guest count, and vision, and we will send you a personalized, detailed pricing breakdown within 48 hours.
+          </p>
+          <a href="contact.html" class="inline-block px-10 py-4 bg-rosegold hover:bg-rosegold-hover text-white rounded-full font-bold transition-all duration-300 transform hover:-translate-y-1 w-full shadow-[0_0_15px_rgba(183,110,121,0.5)]">
+            Start Your Inquiry
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-dark-gray text-white pt-20 pb-10 mt-auto border-t-4 border-rosegold">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Design <span class="text-rosegold">Studio</span></h3>
+          <p class="text-gray-400 mb-6 leading-relaxed">
+            Crafting elegant, timeless, and personalized wedding invitations and paper goods that beautifully introduce your special day.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-rosegold rounded-full flex items-center justify-center transition-colors duration-300">
+              <i class="fab fa-pinterest-p"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-rosegold rounded-full flex items-center justify-center transition-colors duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 hover:bg-rosegold rounded-full flex items-center justify-center transition-colors duration-300">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-6 text-soft-pink">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Home</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Our Story</a></li>
+            <li><a href="designers.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Our Designers</a></li>
+            <li><a href="pricing.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Pricing Guide</a></li>
+            <li><a href="inspiration.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Wedding Inspiration</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-6 text-soft-pink">Our Collections</h4>
+          <ul class="space-y-3">
+            <li><a href="collections.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Custom Invitations</a></li>
+            <li><a href="collections.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Foil Stamping</a></li>
+            <li><a href="collections.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Letterpress Printing</a></li>
+            <li><a href="collections.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Envelope Calligraphy</a></li>
+            <li><a href="collections.html" class="text-gray-400 hover:text-rosegold transition-colors duration-300">Wax Seals & Ribbons</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-6 text-soft-pink">Contact Us</h4>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt text-rosegold mt-1 mr-3"></i>
+              <span class="text-gray-400">123 Design Studio Ave, Creative District</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone text-rosegold mr-3"></i>
+              <a href="tel:+919876543210" class="text-gray-400 hover:text-rosegold transition-colors">+91 98765 43210</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope text-rosegold mr-3"></i>
+              <a href="mailto:hello@designstudio.com" class="text-gray-400 hover:text-rosegold transition-colors">hello@designstudio.com</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-clock text-rosegold mr-3"></i>
+              <span class="text-gray-400">Mon - Fri: 10AM - 5PM</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">
+          © 2026 Design Studio. All rights reserved.
+        </p>
+        <div class="flex space-x-6">
+          <a href="login.html" class="text-gray-500 hover:text-rosegold text-sm transition-colors duration-300">Client Portal</a>
+          <a href="#" class="text-gray-500 hover:text-rosegold text-sm transition-colors duration-300">Privacy Policy</a>
+          <a href="#" class="text-gray-500 hover:text-rosegold text-sm transition-colors duration-300">Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const html = document.documentElement;
+
+    function toggleTheme() {
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+    if (localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+
+    // RTL Toggle
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+
+    function toggleRTL() {
+      if (html.getAttribute('dir') === 'rtl') {
+        html.removeAttribute('dir');
+        localStorage.setItem('direction', 'ltr');
+      } else {
+        html.setAttribute('dir', 'rtl');
+        localStorage.setItem('direction', 'rtl');
+      }
+    }
+
+    if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+    if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+    if (localStorage.getItem('direction') === 'rtl') html.setAttribute('dir', 'rtl');
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Mobile Dropdowns Toggle Function
+    function setupMobileDropdown(dropdownId, menuId, iconId) {
+      const dropdown = document.getElementById(dropdownId);
+      const menu = document.getElementById(menuId);
+      const icon = document.getElementById(iconId);
+      
+      if(dropdown && menu && icon) {
+        dropdown.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+          icon.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+      }
+    }
+
+    // Initialize dropdowns
+    setupMobileDropdown('mobile-home-dropdown', 'mobile-home-menu', 'mobile-home-icon');
+    setupMobileDropdown('mobile-dashboard-dropdown', 'mobile-dashboard-menu', 'mobile-dashboard-icon');
+
+    // Pricing Toggle Logic
+    const pricingToggle = document.getElementById('pricing-toggle');
+    const priceEssential = document.getElementById('price-essential');
+    const priceClassic = document.getElementById('price-classic');
+    const priceHeirloom = document.getElementById('price-heirloom');
+
+    if (pricingToggle) {
+      pricingToggle.addEventListener('change', function() {
+        if (this.checked) {
+          // 150 Qty Pricing
+          priceEssential.textContent = '$850';
+          priceClassic.textContent = '$1,950';
+          priceHeirloom.textContent = '$3,600';
+        } else {
+          // 100 Qty Pricing (Default)
+          priceEssential.textContent = '$650';
+          priceClassic.textContent = '$1,450';
+          priceHeirloom.textContent = '$2,800';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
