@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Design Studio</title>
-  <link rel="icon" type="image/jpeg" href="images/invitation_logo.jpg">
+  <link rel="icon" type="image/jpeg" href="images\d7b64de7-7e0e-4dfa-a821-3c04a0161ed5.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -58,6 +58,20 @@
     [dir="ltr"] #sidebar.sidebar-closed {
       transform: translateX(-100%);
     }
+
+    /* Hide sections by default */
+    .content-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body class="font-sans antialiased bg-gray-50 dark:bg-[#222222] text-gray-800 dark:text-gray-100 transition-colors duration-300">
@@ -78,43 +92,44 @@
         
         <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Main</p>
         
-        <a href="admin-dashboard.html" class="flex items-center space-x-3 px-4 py-3 bg-rosegold text-white rounded-xl shadow-lg shadow-rosegold/20 transition-all duration-300 transform hover:scale-[1.02]">
+        <button data-target="dashboard" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 bg-rosegold text-white rounded-xl shadow-lg shadow-rosegold/20 transition-all duration-300 transform hover:scale-[1.02]">
           <i class="fas fa-th-large w-5 text-center"></i>
           <span class="font-medium">Dashboard</span>
-        </a>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="appointments" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-calendar-check w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Appointments</span>
           <span class="ml-auto bg-rosegold text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
-        </a>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="couples" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-users w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Couples</span>
-        </a>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="design-team" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-paint-brush w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Design Team</span>
-        </a>
+        </button>
 
         <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mt-8 mb-3">Management</p>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="services" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-tags w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Services & Pricing</span>
-        </a>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="inquiries" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-envelope w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Inquiries</span>
-        </a>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
+        <button data-target="settings" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
           <i class="fas fa-cog w-5 text-center group-hover:text-rosegold transition-colors"></i>
           <span class="font-medium">Settings</span>
-        </a>
+        </button>
+
       </nav>
 
       <div class="p-4 border-t border-rosegold/20 bg-dark-gray/80">
@@ -137,13 +152,13 @@
           <button id="sidebar-toggle" class="lg:hidden p-2 ltr:-ml-2 rtl:-mr-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none">
             <i class="fas fa-bars text-xl"></i>
           </button>
-          <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white truncate">Dashboard Overview</h2>
+          <h2 id="page-title" class="text-lg md:text-xl font-bold text-gray-800 dark:text-white truncate">Dashboard Overview</h2>
         </div>
 
         <div class="flex items-center gap-2 md:gap-4">
           
           <div class="hidden md:flex relative group">
-            <input type="text" placeholder="Search couples, bookings..." class="ltr:pl-10 rtl:pr-10 ltr:pr-4 rtl:pl-4 py-2 bg-gray-100 dark:bg-[#1a1a1a] text-gray-700 dark:text-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rosegold w-48 lg:w-64 transition-all border border-transparent focus:bg-white dark:focus:bg-dark-gray">
+            <input type="text" placeholder="Search..." class="ltr:pl-10 rtl:pr-10 ltr:pr-4 rtl:pl-4 py-2 bg-gray-100 dark:bg-[#1a1a1a] text-gray-700 dark:text-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rosegold w-48 lg:w-64 transition-all border border-transparent focus:bg-white dark:focus:bg-dark-gray">
             <i class="fas fa-search absolute ltr:left-3 rtl:right-3 top-2.5 text-gray-400 group-focus-within:text-rosegold transition-colors"></i>
           </div>
 
@@ -166,96 +181,96 @@
 
       <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 scroll-smooth">
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-          
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Revenue</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">$24,500</h3>
+        <section id="dashboard" class="content-section active">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+            <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Revenue</p>
+                  <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">$24,500</h3>
+                </div>
+                <div class="p-3 bg-soft-pink/50 dark:bg-rosegold/10 rounded-xl">
+                  <i class="fas fa-wallet text-rosegold text-lg"></i>
+                </div>
               </div>
-              <div class="p-3 bg-soft-pink/50 dark:bg-rosegold/10 rounded-xl">
-                <i class="fas fa-wallet text-rosegold text-lg"></i>
+              <div class="flex items-center text-xs">
+                <span class="text-green-600 dark:text-green-400 flex items-center font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
+                  <i class="fas fa-arrow-up ltr:mr-1 rtl:ml-1"></i> 15%
+                </span>
+                <span class="text-gray-400 ltr:ml-2 rtl:mr-2">vs last month</span>
               </div>
             </div>
-            <div class="flex items-center text-xs">
-              <span class="text-green-600 dark:text-green-400 flex items-center font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
-                <i class="fas fa-arrow-up ltr:mr-1 rtl:ml-1"></i> 15%
-              </span>
-              <span class="text-gray-400 ltr:ml-2 rtl:mr-2">vs last month</span>
+
+            <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Active Bookings</p>
+                  <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">32</h3>
+                </div>
+                <div class="p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl">
+                  <i class="fas fa-calendar-check text-indigo-500 text-lg"></i>
+                </div>
+              </div>
+              <div class="flex items-center text-xs">
+                <span class="text-gray-500 dark:text-gray-400">12 upcoming this week</span>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Couples</p>
+                  <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">840</h3>
+                </div>
+                <div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
+                  <i class="fas fa-users text-blue-500 text-lg"></i>
+                </div>
+              </div>
+              <div class="flex items-center text-xs">
+                <span class="text-green-600 dark:text-green-400 flex items-center font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
+                  <i class="fas fa-arrow-up ltr:mr-1 rtl:ml-1"></i> 8%
+                </span>
+                <span class="text-gray-400 ltr:ml-2 rtl:mr-2">vs last month</span>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Designers Available</p>
+                  <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">6</h3>
+                </div>
+                <div class="p-3 bg-green-50 dark:bg-green-900/30 rounded-xl">
+                  <i class="fas fa-paint-brush text-green-500 text-lg"></i>
+                </div>
+              </div>
+              <div class="flex items-center text-xs">
+                <span class="text-green-600 dark:text-green-400 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">All online</span>
+              </div>
             </div>
           </div>
 
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Active Bookings</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">32</h3>
-              </div>
-              <div class="p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl">
-                <i class="fas fa-calendar-check text-indigo-500 text-lg"></i>
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Revenue Analytics</h3>
+              <div class="relative h-64 w-full">
+                <canvas id="revenueChart"></canvas>
               </div>
             </div>
-            <div class="flex items-center text-xs">
-              <span class="text-gray-500 dark:text-gray-400">12 upcoming this week</span>
+            <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Booking Status Distribution</h3>
+              <div class="relative h-64 w-full flex justify-center">
+                <canvas id="projectChart"></canvas>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Total Couples</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">840</h3>
-              </div>
-              <div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
-                <i class="fas fa-users text-blue-500 text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-green-600 dark:text-green-400 flex items-center font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
-                <i class="fas fa-arrow-up ltr:mr-1 rtl:ml-1"></i> 8%
-              </span>
-              <span class="text-gray-400 ltr:ml-2 rtl:mr-2">vs last month</span>
-            </div>
-          </div>
-
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Designers Available</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">6</h3>
-              </div>
-              <div class="p-3 bg-green-50 dark:bg-green-900/30 rounded-xl">
-                <i class="fas fa-paint-brush text-green-500 text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-green-600 dark:text-green-400 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">All online</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
-          <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Revenue Analytics</h3>
-            <div class="relative h-64 w-full">
-              <canvas id="revenueChart"></canvas>
-            </div>
-          </div>
-          <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Booking Status Distribution</h3>
-            <div class="relative h-64 w-full flex justify-center">
-              <canvas id="projectChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid lg:grid-cols-3 gap-8">
-          
-          <div class="lg:col-span-2 bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden mb-8 lg:mb-0">
+        <section id="appointments" class="content-section">
+          <div class="bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
             <div class="p-5 md:p-6 flex items-center justify-between border-b border-gray-200 dark:border-gray-800">
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white">Recent Appointments</h3>
-              <button class="text-sm text-rosegold hover:text-rosegold-hover font-semibold transition-colors">View All</button>
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">All Appointments</h3>
+              <button class="text-sm text-rosegold hover:text-rosegold-hover font-semibold transition-colors">Add New</button>
             </div>
             
             <div class="overflow-x-auto">
@@ -299,25 +314,94 @@
                       <button class="text-gray-400 hover:text-rosegold transition-colors p-1"><i class="fas fa-ellipsis-v"></i></button>
                     </td>
                   </tr>
-                  <tr class="hover:bg-gray-50 dark:hover:bg-[#2a2a2a] transition-colors">
-                    <td class="px-6 py-4 font-semibold text-gray-800 dark:text-white">Sarah & David</td>
-                    <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Letterpress Printing</td>
-                    <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Nov 02, 9:00 AM</td>
-                    <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Elena Rodriguez</td>
-                    <td class="px-6 py-4">
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">
-                        Confirmed
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 ltr:text-right rtl:text-left">
-                      <button class="text-gray-400 hover:text-rosegold transition-colors p-1"><i class="fas fa-ellipsis-v"></i></button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </section>
 
+        <section id="couples" class="content-section">
+          <div class="bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Couples Directory</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow bg-gray-50 dark:bg-[#1a1a1a]">
+                  <div class="w-12 h-12 rounded-full bg-rosegold/20 text-rosegold flex items-center justify-center font-bold text-xl">E&T</div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 dark:text-white">Emily & Thomas</h4>
+                    <p class="text-xs text-gray-500">Wedding: Dec 12, 2026</p>
+                  </div>
+               </div>
+               <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow bg-gray-50 dark:bg-[#1a1a1a]">
+                  <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center font-bold text-xl">J&J</div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 dark:text-white">John & Jessica</h4>
+                    <p class="text-xs text-gray-500">Wedding: Jan 05, 2027</p>
+                  </div>
+               </div>
+               <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow bg-gray-50 dark:bg-[#1a1a1a]">
+                  <div class="w-12 h-12 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center font-bold text-xl">S&D</div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 dark:text-white">Sarah & David</h4>
+                    <p class="text-xs text-gray-500">Wedding: Mar 15, 2027</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="design-team" class="content-section">
+          <div class="bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Design Team</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div class="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Sarah Jenkins" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-2 border-rosegold">
+                <h4 class="font-bold text-gray-800 dark:text-white">Sarah Jenkins</h4>
+                <p class="text-xs text-gray-500">Lead Designer</p>
+              </div>
+              <div class="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Marcus Chen" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-2 border-gray-300 dark:border-gray-600">
+                <h4 class="font-bold text-gray-800 dark:text-white">Marcus Chen</h4>
+                <p class="text-xs text-gray-500">Illustrator</p>
+              </div>
+              <div class="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Elena Rodriguez" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-2 border-gray-300 dark:border-gray-600">
+                <h4 class="font-bold text-gray-800 dark:text-white">Elena Rodriguez</h4>
+                <p class="text-xs text-gray-500">Letterpress Specialist</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" class="content-section">
+          <div class="bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-6">Services & Pricing</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center p-5 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-lg">Custom Suite Design</h4>
+                  <p class="text-sm text-gray-500 mt-1">Full custom invitation suite with up to 3 revision rounds.</p>
+                </div>
+                <div class="font-bold text-rosegold text-xl whitespace-nowrap">$1,200</div>
+              </div>
+              <div class="flex justify-between items-center p-5 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-lg">Foil Stamping Add-on</h4>
+                  <p class="text-sm text-gray-500 mt-1">Premium metallic foil stamping for invitations and RSVP cards.</p>
+                </div>
+                <div class="font-bold text-rosegold text-xl whitespace-nowrap">$450</div>
+              </div>
+              <div class="flex justify-between items-center p-5 border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-[#1a1a1a]">
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-lg">Letterpress Printing</h4>
+                  <p class="text-sm text-gray-500 mt-1">Traditional deep-impression letterpress on heavy cotton stock.</p>
+                </div>
+                <div class="font-bold text-rosegold text-xl whitespace-nowrap">$600</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="inquiries" class="content-section">
           <div class="bg-white dark:bg-dark-gray rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-5 md:p-6">
             <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-6">Recent Inquiries</h3>
             <div class="space-y-6">
@@ -331,7 +415,7 @@
                     <h4 class="font-semibold text-gray-800 dark:text-white truncate ltr:pr-2 rtl:pl-2">Michael & Lisa</h4>
                     <span class="text-xs text-gray-400 whitespace-nowrap">2 hrs ago</span>
                   </div>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">Looking for a custom watercolor invitation suite for our destination wedding...</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Looking for a custom watercolor invitation suite for our destination wedding in Tuscany. We have a mood board prepared and would love to schedule a consultation.</p>
                 </div>
               </div>
 
@@ -346,27 +430,71 @@
                     <h4 class="font-semibold text-gray-800 dark:text-white truncate ltr:pr-2 rtl:pl-2">Emily & James</h4>
                     <span class="text-xs text-gray-400 whitespace-nowrap">5 hrs ago</span>
                   </div>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">Interested in letterpress printing and custom wax seals for an upcoming gala...</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Interested in letterpress printing and custom wax seals for an upcoming gala. Do you offer bulk pricing for non-profits?</p>
                 </div>
               </div>
 
             </div>
           </div>
+        </section>
 
-        </div>
+        <section id="settings" class="content-section">
+          <div class="bg-white dark:bg-dark-gray rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 max-w-2xl">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-6">General Settings</h3>
+            <form class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Studio Name</label>
+                <input type="text" value="Design Studio" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-[#1a1a1a] text-gray-800 dark:text-white focus:ring-2 focus:ring-rosegold focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Contact Email</label>
+                <input type="email" value="hello@designstudio.com" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-[#1a1a1a] text-gray-800 dark:text-white focus:ring-2 focus:ring-rosegold focus:outline-none">
+              </div>
+              <div class="pt-4">
+                <button type="button" class="bg-rosegold text-white px-6 py-2.5 rounded-lg font-medium hover:bg-rosegold-hover transition-colors shadow-lg shadow-rosegold/30">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </section>
 
       </main>
     </div>
   </div>
 
   <script>
+    // --- Navigation Filter Logic ---
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('.content-section');
+    const pageTitle = document.getElementById('page-title');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 1. Reset all buttons to default state
+        navButtons.forEach(b => {
+          b.className = 'nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group';
+        });
+
+        // 2. Set clicked button to active state
+        btn.className = 'nav-btn w-full flex items-center space-x-3 px-4 py-3 bg-rosegold text-white rounded-xl shadow-lg shadow-rosegold/20 transition-all duration-300 transform hover:scale-[1.02]';
+
+        // 3. Hide all sections
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // 4. Show targeted section
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+
+        // 5. Update header title
+        pageTitle.textContent = btn.querySelector('span').textContent + " Overview";
+      });
+    });
+
     // --- RTL/LTR Toggle Logic ---
     const rtlToggle = document.getElementById('rtl-toggle');
     const rtlText = document.getElementById('rtl-text');
     const html = document.documentElement;
     const mainContent = document.querySelector('.flex-1.lg\\:ml-64');
 
-    // Initialize RTL from localStorage
     if (localStorage.getItem('direction') === 'rtl') {
       html.setAttribute('dir', 'rtl');
       rtlText.textContent = 'LTR';
@@ -455,7 +583,6 @@
       const textColor = isDark ? '#9ca3af' : '#4b5563';
       const gridColor = isDark ? '#374151' : '#e5e7eb';
 
-      // Revenue Chart
       const ctx1 = document.getElementById('revenueChart').getContext('2d');
       revenueChart = new Chart(ctx1, {
         type: 'line',
@@ -464,7 +591,7 @@
           datasets: [{
             label: 'Revenue ($)',
             data: [15000, 21000, 18000, 29000, 24000, 34000],
-            borderColor: '#B76E79', // Rose Gold color
+            borderColor: '#B76E79',
             backgroundColor: 'rgba(183, 110, 121, 0.1)',
             tension: 0.4,
             fill: true,
@@ -477,14 +604,8 @@
           responsive: true,
           maintainAspectRatio: false,
           scales: {
-            y: {
-              grid: { color: gridColor },
-              ticks: { color: textColor }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: textColor }
-            }
+            y: { grid: { color: gridColor }, ticks: { color: textColor } },
+            x: { grid: { display: false }, ticks: { color: textColor } }
           },
           plugins: {
             legend: { display: false },
@@ -500,7 +621,6 @@
         }
       });
 
-      // Booking Status Chart
       const ctx2 = document.getElementById('projectChart').getContext('2d');
       projectChart = new Chart(ctx2, {
         type: 'doughnut',
@@ -508,7 +628,7 @@
           labels: ['Completed', 'Upcoming', 'Pending'],
           datasets: [{
             data: [45, 32, 12],
-            backgroundColor: ['#22c55e', '#B76E79', '#f59e0b'], // Rose Gold used for 'Upcoming'
+            backgroundColor: ['#22c55e', '#B76E79', '#f59e0b'],
             borderWidth: 0,
             hoverOffset: 4
           }]
@@ -544,14 +664,12 @@
 
     window.addEventListener('load', initCharts);
     
-    // Handle Window Resize
     window.addEventListener('resize', () => {
        if (window.innerWidth >= 1024) {
          sidebar.classList.remove('sidebar-closed');
          overlay.classList.add('hidden', 'opacity-0');
        } else {
          if (!overlay.classList.contains('hidden')) {
-           // Keep open if it was open
          } else {
            sidebar.classList.add('sidebar-closed');
          }
