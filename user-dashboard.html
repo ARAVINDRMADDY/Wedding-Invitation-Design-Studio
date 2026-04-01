@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Dashboard - Design Studio</title>
-  <link rel="icon" type="image/jpeg" href="images/invitation_logo.jpg">
+  <title>Client Collaboration - Design Studio</title>
+  <link rel="icon" type="image/jpeg" href="images\d7b64de7-7e0e-4dfa-a821-3c04a0161ed5.png">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     tailwind.config = { 
@@ -17,9 +17,10 @@
           colors: {
             rosegold: '#B76E79',
             'rosegold-hover': '#9f5c66',
-            'dark-gray': '#3A3A3A',
+            'dark-gray': '#2C2C2C',
             'soft-pink': '#FFF1F0',
-            white: '#FFFFFF'
+            white: '#FFFFFF',
+            cream: '#FAFAFA'
           }
         }
       }
@@ -35,346 +36,449 @@
     .dark ::-webkit-scrollbar-thumb { background: #4b5563; }
     ::-webkit-scrollbar-thumb:hover { background: #B76E79; }
     
-    /* Smooth transition for sidebar */
+    /* Smooth transition for sidebar and layout */
     .sidebar-transition {
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    .layout-transition {
+      transition: all 0.4s ease-in-out;
+    }
 
     /* RTL Support */
-    [dir="rtl"] #sidebar {
-      left: auto;
-      right: 0;
-    }
-
-    [dir="rtl"] #sidebar.sidebar-closed {
-      transform: translateX(100%);
-    }
-
-    [dir="rtl"] .flex-1.lg\:ml-64 {
-      margin-left: 0;
-      margin-right: 16rem;
-    }
-
-    [dir="ltr"] #sidebar.sidebar-closed {
-      transform: translateX(-100%);
-    }
+    [dir="rtl"] #sidebar { left: auto; right: 0; }
+    [dir="rtl"] #sidebar.sidebar-closed { transform: translateX(100%); }
+    [dir="rtl"] .flex-1.lg\:ml-64 { margin-left: 0; margin-right: 16rem; }
+    [dir="ltr"] #sidebar.sidebar-closed { transform: translateX(-100%); }
   </style>
 </head>
-<body class="font-sans antialiased bg-gray-50 dark:bg-[#222222] text-gray-800 dark:text-gray-100 transition-colors duration-300">
+<body class="font-sans antialiased bg-cream dark:bg-[#1f1f1f] text-gray-800 dark:text-gray-100 transition-colors duration-300">
 
-  <div class="flex h-screen overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]">
+  <div class="flex h-screen overflow-hidden">
 
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden backdrop-blur-sm transition-opacity opacity-0"></div>
 
-    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-dark-gray border-r border-rosegold/20 text-white sidebar-closed lg:!translate-x-0 sidebar-transition shadow-2xl flex flex-col">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#2A2A2A] border-r border-rosegold/20 text-gray-800 dark:text-white sidebar-closed lg:!translate-x-0 sidebar-transition shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex flex-col">
       
-      <div class="h-16 md:h-20 flex items-center justify-center border-b border-rosegold/20 px-6 shrink-0">
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
-          <span class="text-xl md:text-2xl font-bold tracking-tight text-white">Design <span class="text-rosegold">Studio</span></span>
+      <div class="h-24 flex flex-col items-center justify-center border-b border-rosegold/10 px-6 shrink-0 pt-4">
+        <a href="index.html" class="flex flex-col items-center text-center">
+          <span class="text-2xl font-bold tracking-tight text-dark-gray dark:text-white">Design <span class="text-rosegold">Studio</span></span>
         </a>
       </div>
 
-      <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1.5 scrollbar-thin">
+      <nav id="sidebar-nav" class="flex-1 overflow-y-auto py-6 px-4 space-y-2 scrollbar-thin">
         
-        <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Overview</p>
+        <p class="px-3 text-xs font-bold text-rosegold uppercase tracking-widest mb-4">Views</p>
         
-        <a href="user-dashboard.html" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 bg-rosegold text-white rounded-xl shadow-lg shadow-rosegold/20 transition-all duration-300 transform hover:scale-[1.02]">
+        <button data-filter="all" class="nav-filter-btn w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 bg-soft-pink/40 dark:bg-white/5 text-rosegold rounded-xl transition-all duration-300">
           <i class="fas fa-home w-5 text-center"></i>
-          <span class="font-medium">My Dashboard</span>
-        </a>
+          <span class="font-medium text-base">Dashboard</span>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
-          <i class="fas fa-envelope-open-text w-5 text-center group-hover:text-rosegold transition-colors"></i>
-          <span class="font-medium">My Suite Design</span>
-        </a>
+        <button data-filter="proofs" class="nav-filter-btn w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/20 dark:hover:bg-white/5 hover:text-rosegold rounded-xl transition-all duration-300 group relative">
+          <i class="fas fa-check-circle w-5 text-center group-hover:text-rosegold transition-colors"></i>
+          <span class="font-medium text-base">Design Proofs</span>
+          <span class="absolute right-4 bg-rosegold text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
-          <i class="fas fa-palette w-5 text-center group-hover:text-rosegold transition-colors"></i>
-          <span class="font-medium">Design Proofs</span>
-          <span class="ltr:ml-auto rtl:mr-auto bg-rosegold text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2 New</span>
-        </a>
+        <button data-filter="messages" class="nav-filter-btn w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/20 dark:hover:bg-white/5 hover:text-rosegold rounded-xl transition-all duration-300 group">
+          <i class="fas fa-comment-dots w-5 text-center group-hover:text-rosegold transition-colors"></i>
+          <span class="font-medium text-base">Designer Notes</span>
+        </button>
 
-        <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mt-8 mb-3">Account</p>
+        <p class="px-3 text-xs font-bold text-rosegold uppercase tracking-widest mt-8 mb-4">Management</p>
 
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
-          <i class="fas fa-file-invoice-dollar w-5 text-center group-hover:text-rosegold transition-colors"></i>
-          <span class="font-medium">Invoices</span>
-          <span class="ltr:ml-auto rtl:mr-auto bg-rosegold text-white text-[10px] font-bold px-2 py-0.5 rounded-full">1 Due</span>
-        </a>
+        <button data-filter="guests" class="nav-filter-btn w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/20 dark:hover:bg-white/5 hover:text-rosegold rounded-xl transition-all duration-300 group">
+          <i class="fas fa-address-book w-5 text-center group-hover:text-rosegold transition-colors"></i>
+          <span class="font-medium text-base">Guest List</span>
+        </button>
 
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
-          <i class="fas fa-calendar-check w-5 text-center group-hover:text-rosegold transition-colors"></i>
-          <span class="font-medium">Consultations</span>
-        </a>
-
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-300 hover:bg-soft-pink/10 hover:text-rosegold rounded-xl transition-all duration-300 group">
-          <i class="fas fa-pen-fancy w-5 text-center group-hover:text-rosegold transition-colors"></i>
-          <span class="font-medium">Message Designer</span>
-        </a>
+        <button data-filter="orders" class="nav-filter-btn w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/20 dark:hover:bg-white/5 hover:text-rosegold rounded-xl transition-all duration-300 group">
+          <i class="fas fa-truck text-sm w-5 text-center group-hover:text-rosegold transition-colors"></i>
+          <span class="font-medium">Orders & Tracking</span>
+        </button>
+        
       </nav>
 
-      <div class="p-4 border-t border-rosegold/20 bg-black/20">
-        <div class="flex items-center space-x-3 rtl:space-x-reverse p-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-          <img src="https://ui-avatars.com/api/?name=Emily+Thomas&background=FFF1F0&color=B76E79" alt="User" class="w-9 h-9 rounded-full border border-rosegold">
+      <div class="p-4 border-t border-rosegold/10 bg-soft-pink/10 dark:bg-black/20">
+        <div class="flex items-center space-x-3 rtl:space-x-reverse p-2 rounded-xl cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Couple" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover">
           <div class="overflow-hidden">
-            <p class="text-sm font-semibold text-white truncate">Emily & Thomas</p>
-            <p class="text-xs text-gray-400 truncate">Oct 2026 Wedding</p>
+            <p class="text-base font-bold text-rosegold truncate">Emily & Thomas</p>
+            <p class="text-[10px] uppercase tracking-wider text-gray-500 truncate">Oct 24, 2026</p>
           </div>
-          <i class="fas fa-chevron-right ltr:ml-auto rtl:mr-auto text-xs text-gray-500"></i>
         </div>
       </div>
     </aside>
 
     <div class="flex-1 flex flex-col lg:ml-64 min-w-0 transition-all duration-300">
       
-      <header class="h-16 md:h-20 bg-white dark:bg-dark-gray shadow-sm border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 md:px-8 z-30 sticky top-0">
+      <header class="h-20 bg-cream/80 dark:bg-[#1f1f1f]/80 backdrop-blur-md flex items-center justify-between px-4 md:px-8 z-30 sticky top-0 border-b border-gray-200/50 dark:border-gray-800/50">
         
         <div class="flex items-center gap-4">
-          <button id="sidebar-toggle" class="lg:hidden p-2 ltr:-ml-2 rtl:-mr-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none">
+          <button id="sidebar-toggle" class="lg:hidden p-2 ltr:-ml-2 rtl:-mr-2 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/50 dark:hover:bg-gray-800 rounded-lg transition-colors focus:outline-none">
             <i class="fas fa-bars text-xl"></i>
           </button>
-          <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white truncate">Welcome back, Emily!</h2>
+          <h2 id="page-title" class="text-xl md:text-2xl font-bold text-dark-gray dark:text-white truncate tracking-wide">Welcome, Emily</h2>
         </div>
 
         <div class="flex items-center gap-2 md:gap-4">
-          
-          <button id="rtl-toggle" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-100 dark:bg-[#1a1a1a] hover:bg-gray-200 dark:hover:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all focus:outline-none font-bold text-xs" title="Toggle RTL/LTR">
+          <button id="rtl-toggle" class="w-10 h-10 rounded-full bg-white dark:bg-[#2A2A2A] shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all focus:outline-none font-bold text-xs" title="Toggle RTL/LTR">
             <span id="rtl-text">RTL</span>
           </button>
 
-          <button id="theme-toggle" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-100 dark:bg-[#1a1a1a] hover:bg-gray-200 dark:hover:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-rosegold transition-all focus:outline-none">
+          <button id="theme-toggle" class="w-10 h-10 rounded-full bg-white dark:bg-[#2A2A2A] shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-rosegold transition-all focus:outline-none">
             <i class="fas fa-moon dark:hidden text-sm md:text-base"></i>
             <i class="fas fa-sun hidden dark:inline text-sm md:text-base"></i>
           </button>
 
-          <a href="login.html" class="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-rosegold dark:hover:text-rosegold transition-colors text-sm font-medium ltr:ml-2 rtl:mr-2">
-            <i class="fas fa-sign-out-alt text-lg"></i>
-            <span class="hidden sm:inline">Logout</span>
+          <a href="login.html" class="flex items-center gap-2 text-gray-500 hover:text-rosegold transition-colors text-sm font-medium ltr:ml-2 rtl:mr-2">
+            <i class="fas fa-sign-out-alt"></i>
           </a>
         </div>
       </header>
 
       <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 scroll-smooth">
         
-        <div class="bg-dark-gray rounded-2xl p-6 mb-8 text-white shadow-lg relative overflow-hidden border border-rosegold/20">
-          <div class="absolute ltr:right-0 rtl:left-0 top-0 h-full w-1/3 bg-rosegold/10 ltr:skew-x-12 rtl:-skew-x-12 transform ltr:translate-x-12 rtl:-translate-x-12"></div>
+        <div id="section-dashboard-top" class="layout-transition block">
           
-          <div class="relative z-10">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-              <div>
-                <p class="text-rosegold text-sm font-bold uppercase tracking-wider">Project Status</p>
-                <h3 class="text-2xl md:text-3xl font-bold mt-1 text-white">The Heirloom Suite</h3>
-              </div>
-              <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20 text-center">
-                <span class="block text-xs text-gray-300">Completion</span>
-                <span class="block text-xl font-bold text-rosegold">60%</span>
-              </div>
-            </div>
-
-            <div class="relative">
-              <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-white/10 border border-white/5">
-                <div style="width: 60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-rosegold transition-all duration-1000"></div>
-              </div>
-              <div class="flex justify-between text-xs md:text-sm text-gray-400 font-medium">
-                <span class="text-rosegold">Consultation</span>
-                <span class="text-rosegold">Design & Proofing</span>
-                <span class="text-white animate-pulse">Printing</span>
-                <span>Assembly</span>
-                <span class="opacity-50">Shipped</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-          
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Paid to Date</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">$1,650</h3>
-              </div>
-              <div class="p-3 bg-soft-pink/50 dark:bg-rosegold/10 rounded-xl">
-                <i class="fas fa-wallet text-rosegold text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-gray-500 dark:text-gray-400">Total Investment: <span class="font-bold text-gray-800 dark:text-gray-200">$3,200</span></span>
-            </div>
-          </div>
-
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Outstanding Balance</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">$1,550</h3>
-              </div>
-              <div class="p-3 bg-red-50 dark:bg-red-900/30 rounded-xl">
-                <i class="fas fa-file-invoice text-red-500 text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-rosegold font-medium bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded-full">Due before shipping</span>
-            </div>
-          </div>
-
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">New Proofs</p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">2</h3>
-              </div>
-              <div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
-                <i class="fas fa-images text-blue-500 text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-green-600 dark:text-green-400 flex items-center font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
-                Ready for Review
-              </span>
-            </div>
-          </div>
-
-          <div class="bg-white dark:bg-dark-gray rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Next Milestone</p>
-                <h3 class="text-xl font-bold text-gray-800 dark:text-white mt-1">Final Approval</h3>
-              </div>
-              <div class="p-3 bg-purple-50 dark:bg-purple-900/30 rounded-xl">
-                <i class="fas fa-check-double text-purple-500 text-lg"></i>
-              </div>
-            </div>
-            <div class="flex items-center text-xs">
-              <span class="text-gray-500 dark:text-gray-400">Deadline: Oct 28th</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
-          
-          <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Stationery Budget Distribution</h3>
-            <div class="relative h-64 w-full flex justify-center">
-              <canvas id="budgetChart"></canvas>
-            </div>
-          </div>
-
-          <div class="bg-white dark:bg-dark-gray p-4 md:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 flex flex-col">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Designer Updates</h3>
+          <div class="rounded-3xl mb-8 relative overflow-hidden shadow-xl group min-h-[280px] flex flex-col justify-end">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Stationery Setup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
             
-            <div class="flex-1 overflow-y-auto ltr:pr-2 rtl:pl-2 space-y-6">
-              
-              <div class="flex gap-4 rtl:flex-row-reverse">
-                <div class="flex flex-col items-center">
-                  <div class="w-8 h-8 rounded-full bg-soft-pink/50 dark:bg-rosegold/20 flex items-center justify-center text-rosegold z-10">
-                    <i class="fas fa-stamp text-xs"></i>
-                  </div>
-                  <div class="h-full w-0.5 bg-gray-100 dark:bg-gray-700 -mb-6 mt-1"></div>
-                </div>
-                <div class="pb-6">
-                  <span class="text-xs text-gray-400">Today, 2:00 PM</span>
-                  <p class="font-medium text-gray-800 dark:text-white">Vintage stamps curated</p>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">We've sourced a beautiful collection of vintage botanical stamps that perfectly match your suite.</p>
-                </div>
-              </div>
-
-              <div class="flex gap-4 rtl:flex-row-reverse">
-                <div class="flex flex-col items-center">
-                  <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 z-10">
-                    <i class="fas fa-file-image text-xs"></i>
-                  </div>
-                  <div class="h-full w-0.5 bg-gray-100 dark:bg-gray-700 -mb-6 mt-1"></div>
-                </div>
-                <div class="pb-6">
-                  <span class="text-xs text-gray-400">Yesterday, 9:30 AM</span>
-                  <p class="font-medium text-gray-800 dark:text-white">Design Proofs Updated</p>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Sarah has uploaded the updated watercolor maps for your review.</p>
-                  <button class="mt-2 text-xs bg-gray-100 dark:bg-[#1a1a1a] px-3 py-1.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700">View Proofs</button>
-                </div>
-              </div>
-
-              <div class="flex gap-4 rtl:flex-row-reverse">
-                <div class="flex flex-col items-center">
-                  <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-green-600 dark:text-green-400 z-10">
-                    <i class="fas fa-check text-xs"></i>
-                  </div>
-                </div>
+            <div class="relative z-10 p-6 md:p-10 w-full">
+              <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                 <div>
-                  <span class="text-xs text-gray-400">Oct 18, 2026</span>
-                  <p class="font-medium text-gray-800 dark:text-white">Calligraphy Completed</p>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">The spot calligraphy for your main invitation has been digitized and approved.</p>
+                  <span class="inline-block px-3 py-1 bg-rosegold/20 backdrop-blur-md border border-rosegold/30 rounded-full text-rosegold text-xs font-bold uppercase tracking-widest mb-3">Order Progress</span>
+                  <h3 class="text-3xl md:text-4xl font-bold text-white mb-2">The Heirloom Suite</h3>
+                  <p class="text-gray-300 font-light flex items-center gap-2"><i class="fas fa-paint-brush text-rosegold text-xs"></i> Currently in Customization & Proofing Phase</p>
+                </div>
+                
+                <div class="flex gap-3">
+                  <button class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full font-medium transition-all text-sm flex items-center gap-2 trigger-orders">
+                    <i class="fas fa-file-invoice-dollar"></i> View Invoice
+                  </button>
+                  <button class="px-6 py-3 bg-rosegold hover:bg-rosegold-hover text-white rounded-full font-medium transition-all shadow-lg text-sm flex items-center gap-2 trigger-messages">
+                    <i class="fas fa-envelope"></i> Message Designer
+                  </button>
                 </div>
               </div>
 
+              <div class="relative bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/10">
+                <div class="flex justify-between mb-2">
+                  <span class="text-xs font-bold text-rosegold uppercase tracking-widest">Milestone Tracker</span>
+                  <span class="text-xs font-bold text-white">40% Complete</span>
+                </div>
+                <div class="overflow-hidden h-1.5 mb-4 text-xs flex rounded-full bg-white/5 border border-white/10">
+                  <div style="width: 40%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-rosegold relative">
+                    <span class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_#fff]"></span>
+                  </div>
+                </div>
+                <div class="flex justify-between text-[10px] md:text-xs font-medium uppercase tracking-wider">
+                  <span class="text-rosegold">Consultation</span>
+                  <span class="text-white">Proofing</span>
+                  <span class="text-gray-500">Printing</span>
+                  <span class="text-gray-500">Calligraphy</span>
+                  <span class="text-gray-500">Shipped</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+            <div class="bg-white dark:bg-[#2A2A2A] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden group cursor-pointer trigger-guests hover:shadow-md transition-shadow">
+              <div class="absolute -right-4 -top-4 text-soft-pink dark:text-white/5 text-7xl transition-transform group-hover:scale-110"><i class="fas fa-address-book"></i></div>
+              <div class="relative z-10">
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider mb-1">Guest List Setup</p>
+                <h3 class="text-3xl font-bold text-dark-gray dark:text-white">120<span class="text-lg text-gray-400">/150</span></h3>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                  <span class="text-rosegold font-medium">Addresses Collected</span>
+                  <span class="text-gray-400 font-bold uppercase tracking-wider group-hover:text-rosegold transition-colors">Manage <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-rosegold rounded-2xl p-6 shadow-lg shadow-rosegold/20 border border-rosegold-hover relative overflow-hidden group text-white cursor-pointer trigger-proofs hover:bg-rosegold-hover transition-colors">
+              <div class="absolute -right-4 -top-4 text-white/10 text-7xl transition-transform group-hover:scale-110"><i class="fas fa-check-double"></i></div>
+              <div class="relative z-10">
+                <p class="text-sm text-white/80 font-medium uppercase tracking-wider mb-1">Action Required</p>
+                <h3 class="text-3xl font-bold">2 Proofs</h3>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                  <span class="font-medium bg-white/20 px-2 py-1 rounded">Awaiting your approval</span>
+                  <span class="text-white font-bold uppercase tracking-wider">Review <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-[#2A2A2A] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
+              <div class="absolute -right-4 -top-4 text-soft-pink dark:text-white/5 text-7xl transition-transform group-hover:scale-110"><i class="fas fa-palette"></i></div>
+              <div class="relative z-10">
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider mb-1">Design Edits</p>
+                <h3 class="text-3xl font-bold text-dark-gray dark:text-white">1<span class="text-lg text-gray-400">/3</span></h3>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                  <span class="text-gray-500 dark:text-gray-400">Rounds Remaining</span>
+                  <span class="text-rosegold font-medium"><i class="fas fa-info-circle"></i> View Policy</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-[#2A2A2A] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden group cursor-pointer trigger-orders hover:shadow-md transition-shadow">
+              <div class="absolute -right-4 -top-4 text-soft-pink dark:text-white/5 text-7xl transition-transform group-hover:scale-110"><i class="fas fa-wallet"></i></div>
+              <div class="relative z-10">
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider mb-1">Total Balance</p>
+                <h3 class="text-3xl font-bold text-dark-gray dark:text-white">$1,550</h3>
+                <div class="mt-4 flex items-center justify-between text-xs">
+                  <span class="text-gray-500 dark:text-gray-400">Due before shipping</span>
+                  <span class="text-gray-400 font-bold uppercase tracking-wider group-hover:text-rosegold transition-colors">Pay Now <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white dark:bg-dark-gray rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden mb-8">
-          <div class="p-5 md:p-6 flex items-center justify-between border-b border-gray-200 dark:border-gray-800">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white">Recent Invoices</h3>
-            <button class="text-sm text-rosegold hover:text-rosegold-hover font-semibold transition-colors">View All</button>
-          </div>
+        <div class="grid grid-cols-1 xl:grid-cols-5 gap-6 mb-8 layout-transition" id="section-dynamic-grid">
           
-          <div class="overflow-x-auto">
-            <table class="w-full text-left rtl:text-right whitespace-nowrap">
-              <thead>
-                <tr class="bg-gray-50 dark:bg-[#1a1a1a] text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
-                  <th class="px-6 py-4 font-semibold">Invoice ID</th>
-                  <th class="px-6 py-4 font-semibold">Description</th>
-                  <th class="px-6 py-4 font-semibold">Date</th>
-                  <th class="px-6 py-4 font-semibold">Amount</th>
-                  <th class="px-6 py-4 font-semibold">Status</th>
-                  <th class="px-6 py-4 font-semibold ltr:text-right rtl:text-left">Download</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200 dark:divide-gray-800 text-sm">
-                <tr class="hover:bg-gray-50 dark:hover:bg-[#2a2a2a] transition-colors">
-                  <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-042</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Heirloom Suite Deposit (50%)</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Aug 10, 2026</td>
-                  <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">$1,400.00</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">
-                      Paid
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 ltr:text-right rtl:text-left">
-                    <button class="text-gray-400 hover:text-rosegold transition-colors p-1"><i class="fas fa-download"></i></button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50 dark:hover:bg-[#2a2a2a] transition-colors">
-                  <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-055</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Custom Venue Illustration Add-on</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Sep 22, 2026</td>
-                  <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">$250.00</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">
-                      Paid
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 ltr:text-right rtl:text-left">
-                    <button class="text-gray-400 hover:text-rosegold transition-colors p-1"><i class="fas fa-download"></i></button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50 dark:hover:bg-[#2a2a2a] transition-colors">
-                  <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-061</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Final Suite Payment (Balance)</td>
-                  <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Oct 26, 2026</td>
-                  <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">$1,550.00</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 animate-pulse border border-red-200 dark:border-red-800">
-                      Pending
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 ltr:text-right rtl:text-left">
-                    <button class="text-gray-400 hover:text-rosegold transition-colors p-1"><i class="fas fa-download"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="item-proofs" class="xl:col-span-3 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 layout-transition block">
+            <div class="flex justify-between items-end mb-6">
+              <div>
+                <h3 class="text-2xl font-bold text-dark-gray dark:text-white">Design Proofs</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Review and approve your bespoke elements before printing.</p>
+              </div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-5 layout-transition" id="proofs-grid">
+              <div class="border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300">
+                <div class="h-48 relative overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <img src="https://images.unsplash.com/photo-1537274942065-eda9d00a6293?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Main Invitation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute top-3 right-3 bg-rosegold text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">Needs Approval</div>
+                </div>
+                <div class="p-5">
+                  <h4 class="font-bold text-lg text-dark-gray dark:text-white mb-1">Main Invitation</h4>
+                  <p class="text-xs text-gray-500 mb-4">v2.0 • Deckled Edge • Rose Gold Foil</p>
+                  <div class="flex gap-2">
+                    <button class="flex-1 bg-dark-gray dark:bg-white text-white dark:text-dark-gray py-2 rounded-lg text-sm font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">Approve</button>
+                    <button class="flex-1 bg-soft-pink dark:bg-gray-800 text-rosegold dark:text-gray-300 py-2 rounded-lg text-sm font-bold hover:bg-rosegold hover:text-white transition-colors border border-transparent dark:border-gray-700">Request Edit</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300">
+                <div class="h-48 relative overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Envelope Calligraphy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute top-3 right-3 bg-rosegold text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">Needs Approval</div>
+                </div>
+                <div class="p-5">
+                  <h4 class="font-bold text-lg text-dark-gray dark:text-white mb-1">Envelope Calligraphy Style</h4>
+                  <p class="text-xs text-gray-500 mb-4">v1.0 • Romantic Script • Vintage Ink</p>
+                  <div class="flex gap-2">
+                    <button class="flex-1 bg-dark-gray dark:bg-white text-white dark:text-dark-gray py-2 rounded-lg text-sm font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">Approve</button>
+                    <button class="flex-1 bg-soft-pink dark:bg-gray-800 text-rosegold dark:text-gray-300 py-2 rounded-lg text-sm font-bold hover:bg-rosegold hover:text-white transition-colors border border-transparent dark:border-gray-700">Request Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div id="item-messages" class="xl:col-span-2 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col layout-transition">
+            <h3 class="text-xl font-bold text-dark-gray dark:text-white mb-6">Designer Notes</h3>
+            
+            <div class="flex-1 overflow-y-auto ltr:pr-2 rtl:pl-2 space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 dark:before:via-gray-700 before:to-transparent min-h-[300px]">
+              
+              <div class="relative flex items-start justify-between">
+                <div class="w-10 h-10 rounded-full bg-white dark:bg-dark-gray border-2 border-rosegold shadow flex items-center justify-center text-rosegold z-10 shrink-0 mt-1 mr-4">
+                  <img src="https://ui-avatars.com/api/?name=Sarah+Designer&background=FFF1F0&color=B76E79" alt="Designer" class="w-full h-full rounded-full">
+                </div>
+                <div class="bg-soft-pink/30 dark:bg-[#222] p-4 rounded-2xl rounded-tl-none border border-gray-100 dark:border-gray-800 flex-1 relative">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <h4 class="font-bold text-sm text-dark-gray dark:text-white">Sarah (Lead Designer)</h4>
+                    <span class="text-[10px] text-gray-400">Today, 2:00 PM</span>
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Hi Emily! I've uploaded the second round of proofs for the main invitation. I adjusted the letter-spacing on the script font just like you requested. I also included a sample of the vintage stamps we discussed!
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative flex items-start justify-between flex-row-reverse">
+                <div class="w-10 h-10 rounded-full border-2 border-gray-200 dark:border-gray-700 shadow flex items-center justify-center shrink-0 mt-1 ml-4 z-10 overflow-hidden bg-white">
+                   <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Couple" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-2xl rounded-tr-none border border-gray-200 dark:border-gray-700 flex-1 text-right relative">
+                  <div class="flex justify-between items-baseline mb-1 flex-row-reverse">
+                    <h4 class="font-bold text-sm text-dark-gray dark:text-white">You</h4>
+                    <span class="text-[10px] text-gray-400">Yesterday, 4:15 PM</span>
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    The watercolor map looks absolutely perfect! Approved. For the envelope calligraphy, could we see an option with slightly thicker downstrokes?
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative flex items-center justify-center my-4">
+                <span class="bg-cream dark:bg-[#1f1f1f] px-3 text-xs font-bold text-gray-400 uppercase tracking-widest z-10 border border-gray-200 dark:border-gray-700 rounded-full py-1">Project Started: Sept 1</span>
+              </div>
+
+            </div>
+            
+            <div class="mt-4 relative shrink-0">
+              <input type="text" placeholder="Reply to Sarah..." class="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-gray-700 rounded-full py-3 px-5 text-sm focus:outline-none focus:border-rosegold dark:text-white placeholder-gray-400">
+              <button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-rosegold hover:bg-rosegold-hover text-white rounded-full flex items-center justify-center transition-colors">
+                <i class="fas fa-paper-plane text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="item-guests" class="hidden xl:col-span-5 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 layout-transition min-h-[calc(100vh-140px)]">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
+              <div>
+                <h3 class="text-2xl font-bold text-dark-gray dark:text-white">Guest List Management</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Collect addresses, track RSVPs, and finalize your seating chart.</p>
+              </div>
+              <div class="flex gap-3 w-full sm:w-auto">
+                <button class="flex-1 sm:flex-none px-4 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-sm font-bold transition-colors border border-gray-200 dark:border-gray-700"><i class="fas fa-file-import mr-2"></i>Import</button>
+                <button class="flex-1 sm:flex-none px-4 py-2.5 bg-rosegold hover:bg-rosegold-hover text-white rounded-lg text-sm font-bold shadow-md transition-colors"><i class="fas fa-plus mr-2"></i>Add Guest</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div class="bg-soft-pink/30 dark:bg-white/5 p-4 rounded-xl border border-soft-pink dark:border-white/10">
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">Total Invited</p>
+                <p class="text-2xl font-bold text-dark-gray dark:text-white mt-1">150</p>
+              </div>
+              <div class="bg-soft-pink/30 dark:bg-white/5 p-4 rounded-xl border border-soft-pink dark:border-white/10">
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">Addresses Saved</p>
+                <p class="text-2xl font-bold text-dark-gray dark:text-white mt-1">120</p>
+              </div>
+              <div class="bg-soft-pink/30 dark:bg-white/5 p-4 rounded-xl border border-soft-pink dark:border-white/10">
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">RSVP Yes</p>
+                <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-1">84</p>
+              </div>
+              <div class="bg-soft-pink/30 dark:bg-white/5 p-4 rounded-xl border border-soft-pink dark:border-white/10">
+                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">RSVP No</p>
+                <p class="text-2xl font-bold text-gray-400 mt-1">12</p>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-xl">
+              <table class="w-full text-left rtl:text-right whitespace-nowrap">
+                <thead>
+                  <tr class="bg-gray-50 dark:bg-[#1a1a1a] text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider border-b border-gray-200 dark:border-gray-700">
+                    <th class="px-6 py-4 font-bold">Guest Name</th>
+                    <th class="px-6 py-4 font-bold">Party Size</th>
+                    <th class="px-6 py-4 font-bold">Address Status</th>
+                    <th class="px-6 py-4 font-bold">RSVP</th>
+                    <th class="px-6 py-4 font-bold text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tdbody class="divide-y divide-gray-200 dark:divide-gray-800 text-sm">
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">The Anderson Family</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">4</td>
+                    <td class="px-6 py-4"><span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2.5 py-1 rounded-full text-xs font-bold border border-green-200 dark:border-green-800">Complete</span></td>
+                    <td class="px-6 py-4"><span class="text-green-600 dark:text-green-400 font-bold"><i class="fas fa-check mr-1"></i> Attending</span></td>
+                    <td class="px-6 py-4 text-center"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-pen"></i></button></td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">Michael Chang & Guest</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">2</td>
+                    <td class="px-6 py-4"><span class="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-2.5 py-1 rounded-full text-xs font-bold border border-red-200 dark:border-red-800">Missing Address</span></td>
+                    <td class="px-6 py-4"><span class="text-gray-500 font-bold">Pending</span></td>
+                    <td class="px-6 py-4 text-center"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-pen"></i></button></td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">Aunt Sarah</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">1</td>
+                    <td class="px-6 py-4"><span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2.5 py-1 rounded-full text-xs font-bold border border-green-200 dark:border-green-800">Complete</span></td>
+                    <td class="px-6 py-4"><span class="text-gray-400 font-bold"><i class="fas fa-times mr-1"></i> Declined</span></td>
+                    <td class="px-6 py-4 text-center"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-pen"></i></button></td>
+                  </tr>
+                </tdbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="item-orders" class="hidden xl:col-span-5 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 layout-transition min-h-[calc(100vh-140px)]">
+            <div class="flex justify-between items-end mb-6">
+              <div>
+                <h3 class="text-2xl font-bold text-dark-gray dark:text-white">Orders & Tracking</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage your payments and track the fulfillment of your stationery.</p>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-[#222] p-8 rounded-2xl border border-gray-200 dark:border-gray-700 mb-8">
+              <h4 class="font-bold text-dark-gray dark:text-white mb-6 uppercase tracking-wider text-sm">Suite Production Status</h4>
+              <div class="relative">
+                <div class="overflow-hidden h-2 mb-6 text-xs flex rounded-full bg-gray-200 dark:bg-gray-800">
+                  <div style="width: 40%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-rosegold"></div>
+                </div>
+                <div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+                  <div class="text-rosegold flex flex-col items-start"><i class="fas fa-check-circle mb-1 text-lg"></i> Consultation</div>
+                  <div class="text-dark-gray dark:text-white flex flex-col items-center"><i class="fas fa-dot-circle mb-1 text-lg animate-pulse"></i> Proofing</div>
+                  <div class="text-gray-400 flex flex-col items-center"><i class="fas fa-circle mb-1 text-lg opacity-50"></i> Printing</div>
+                  <div class="text-gray-400 flex flex-col items-center"><i class="fas fa-circle mb-1 text-lg opacity-50"></i> Assembly</div>
+                  <div class="text-gray-400 flex flex-col items-end"><i class="fas fa-box mb-1 text-lg opacity-50"></i> Shipped</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white dark:bg-[#1f1f1f] p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <p class="text-sm text-gray-500 font-bold uppercase tracking-wider mb-2">Total Investment</p>
+                <p class="text-3xl font-bold text-dark-gray dark:text-white">$3,200.00</p>
+              </div>
+              <div class="bg-white dark:bg-[#1f1f1f] p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <p class="text-sm text-gray-500 font-bold uppercase tracking-wider mb-2">Amount Paid</p>
+                <p class="text-3xl font-bold text-green-600 dark:text-green-500">$1,650.00</p>
+              </div>
+              <div class="bg-rosegold/10 dark:bg-rosegold/5 p-6 rounded-xl border border-rosegold/30 shadow-sm">
+                <p class="text-sm text-rosegold font-bold uppercase tracking-wider mb-2">Outstanding Balance</p>
+                <p class="text-3xl font-bold text-rosegold">$1,550.00</p>
+                <button class="mt-4 w-full bg-rosegold text-white py-2 rounded-lg font-bold text-sm shadow-md hover:bg-rosegold-hover transition-colors">Pay Balance</button>
+              </div>
+            </div>
+
+            <h4 class="font-bold text-dark-gray dark:text-white mb-4 uppercase tracking-wider text-sm">Invoice History</h4>
+            <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-xl">
+              <table class="w-full text-left rtl:text-right whitespace-nowrap">
+                <thead>
+                  <tr class="bg-gray-50 dark:bg-[#1a1a1a] text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider border-b border-gray-200 dark:border-gray-700">
+                    <th class="px-6 py-4 font-bold">Invoice ID</th>
+                    <th class="px-6 py-4 font-bold">Description</th>
+                    <th class="px-6 py-4 font-bold">Date</th>
+                    <th class="px-6 py-4 font-bold">Amount</th>
+                    <th class="px-6 py-4 font-bold">Status</th>
+                    <th class="px-6 py-4 font-bold text-right">Download</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-800 text-sm">
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-042</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Heirloom Suite Deposit (50%)</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Aug 10, 2026</td>
+                    <td class="px-6 py-4 font-bold text-gray-800 dark:text-white">$1,400.00</td>
+                    <td class="px-6 py-4"><span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2.5 py-1 rounded-full text-xs font-bold border border-green-200 dark:border-green-800">Paid</span></td>
+                    <td class="px-6 py-4 text-right"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-download"></i></button></td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-055</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Custom Venue Illustration Add-on</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Sep 22, 2026</td>
+                    <td class="px-6 py-4 font-bold text-gray-800 dark:text-white">$250.00</td>
+                    <td class="px-6 py-4"><span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2.5 py-1 rounded-full text-xs font-bold border border-green-200 dark:border-green-800">Paid</span></td>
+                    <td class="px-6 py-4 text-right"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-download"></i></button></td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+                    <td class="px-6 py-4 text-gray-800 dark:text-gray-200 font-mono">#INV-2026-061</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Final Suite Payment (Balance)</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">Oct 26, 2026</td>
+                    <td class="px-6 py-4 font-bold text-gray-800 dark:text-white">$1,550.00</td>
+                    <td class="px-6 py-4"><span class="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-2.5 py-1 rounded-full text-xs font-bold border border-red-200 dark:border-red-800">Pending</span></td>
+                    <td class="px-6 py-4 text-right"><button class="text-gray-400 hover:text-rosegold"><i class="fas fa-download"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
 
       </main>
@@ -382,13 +486,141 @@
   </div>
 
   <script>
+    // --- Custom Dashboard Filtering Logic ---
+    const filterBtns = document.querySelectorAll('.nav-filter-btn');
+    
+    // Layout Wrappers
+    const topSection = document.getElementById('section-dashboard-top');
+    const dynamicGrid = document.getElementById('section-dynamic-grid');
+    
+    // Content Items
+    const itemProofs = document.getElementById('item-proofs');
+    const proofsGrid = document.getElementById('proofs-grid');
+    const itemMessages = document.getElementById('item-messages');
+    const itemGuests = document.getElementById('item-guests');
+    const itemOrders = document.getElementById('item-orders');
+    
+    const pageTitle = document.getElementById('page-title');
+
+    // Extra triggers on the page that should switch tabs
+    const triggerProofs = document.querySelectorAll('.trigger-proofs');
+    const triggerMessages = document.querySelectorAll('.trigger-messages');
+    const triggerGuests = document.querySelectorAll('.trigger-guests');
+    const triggerOrders = document.querySelectorAll('.trigger-orders');
+
+    // Define classes for active/inactive sidebar buttons
+    const activeBtnClasses = "w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 bg-soft-pink/40 dark:bg-white/5 text-rosegold rounded-xl transition-all duration-300".split(" ");
+    const inactiveBtnClasses = "w-full text-left flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-soft-pink/20 dark:hover:bg-white/5 hover:text-rosegold rounded-xl transition-all duration-300 group".split(" ");
+
+    function applyFilter(filterType) {
+      // 1. Update Sidebar Active States
+      filterBtns.forEach(btn => {
+        const btnType = btn.getAttribute('data-filter');
+        const icon = btn.querySelector('i');
+        
+        // Reset to inactive
+        btn.className = 'nav-filter-btn';
+        btn.classList.add(...inactiveBtnClasses);
+        icon.className = icon.className.replace('group-hover:text-rosegold transition-colors', '');
+        icon.classList.add('group-hover:text-rosegold', 'transition-colors');
+
+        // Apply active if matched
+        if (btnType === filterType) {
+          btn.className = 'nav-filter-btn';
+          btn.classList.add(...activeBtnClasses);
+          icon.classList.remove('group-hover:text-rosegold', 'transition-colors');
+        }
+      });
+
+      // 2. Adjust Layout Visibility & Sizing
+      if (filterType === 'all') {
+        pageTitle.textContent = "Welcome, Emily";
+        topSection.style.display = 'block';
+        dynamicGrid.style.display = 'grid';
+        
+        itemProofs.style.display = 'block';
+        itemProofs.className = 'xl:col-span-3 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 layout-transition';
+        proofsGrid.className = 'grid sm:grid-cols-2 gap-5 layout-transition';
+        
+        itemMessages.style.display = 'flex';
+        itemMessages.className = 'xl:col-span-2 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col layout-transition min-h-[500px]';
+        
+        itemGuests.style.display = 'none';
+        itemOrders.style.display = 'none';
+
+      } else if (filterType === 'proofs') {
+        pageTitle.textContent = "Design Proofs";
+        topSection.style.display = 'none';
+        dynamicGrid.style.display = 'grid';
+        
+        itemProofs.style.display = 'block';
+        itemProofs.className = 'xl:col-span-5 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 layout-transition min-h-[calc(100vh-140px)]';
+        proofsGrid.className = 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 layout-transition';
+        
+        itemMessages.style.display = 'none';
+        itemGuests.style.display = 'none';
+        itemOrders.style.display = 'none';
+
+      } else if (filterType === 'messages') {
+        pageTitle.textContent = "Designer Notes";
+        topSection.style.display = 'none';
+        dynamicGrid.style.display = 'grid';
+        
+        itemProofs.style.display = 'none';
+        
+        itemMessages.style.display = 'flex';
+        itemMessages.className = 'xl:col-span-5 bg-white dark:bg-[#2A2A2A] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col layout-transition h-[calc(100vh-140px)]';
+        
+        itemGuests.style.display = 'none';
+        itemOrders.style.display = 'none';
+
+      } else if (filterType === 'guests') {
+        pageTitle.textContent = "Guest List";
+        topSection.style.display = 'none';
+        dynamicGrid.style.display = 'grid';
+        
+        itemProofs.style.display = 'none';
+        itemMessages.style.display = 'none';
+        itemOrders.style.display = 'none';
+        
+        itemGuests.style.display = 'block';
+
+      } else if (filterType === 'orders') {
+        pageTitle.textContent = "Orders & Tracking";
+        topSection.style.display = 'none';
+        dynamicGrid.style.display = 'grid';
+        
+        itemProofs.style.display = 'none';
+        itemMessages.style.display = 'none';
+        itemGuests.style.display = 'none';
+        
+        itemOrders.style.display = 'block';
+      }
+      
+      // Close sidebar on mobile after clicking
+      if (window.innerWidth < 1024) {
+        toggleSidebar();
+      }
+    }
+
+    // Initialize Event Listeners
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyFilter(btn.getAttribute('data-filter'));
+      });
+    });
+
+    triggerProofs.forEach(el => el.addEventListener('click', () => applyFilter('proofs')));
+    triggerMessages.forEach(el => el.addEventListener('click', () => applyFilter('messages')));
+    triggerGuests.forEach(el => el.addEventListener('click', () => applyFilter('guests')));
+    triggerOrders.forEach(el => el.addEventListener('click', () => applyFilter('orders')));
+
     // --- RTL/LTR Toggle Logic ---
     const rtlToggle = document.getElementById('rtl-toggle');
     const rtlText = document.getElementById('rtl-text');
     const html = document.documentElement;
     const mainContent = document.querySelector('.flex-1.lg\\:ml-64');
 
-    // Initialize RTL from localStorage
     if (localStorage.getItem('direction') === 'rtl') {
       html.setAttribute('dir', 'rtl');
       rtlText.textContent = 'LTR';
@@ -458,102 +690,18 @@
       html.classList.toggle('dark');
       if (html.classList.contains('dark')) {
         localStorage.setItem('theme', 'dark');
-        updateCharts(true);
       } else {
         localStorage.setItem('theme', 'light');
-        updateCharts(false);
       }
     });
 
-    // --- Chart.js Configuration for USER Dashboard ---
-    let budgetChart;
-
-    function initCharts() {
-      const isDark = html.classList.contains('dark');
-      const textColor = isDark ? '#9ca3af' : '#4b5563';
-
-      // Budget Breakdown Chart (Doughnut)
-      const ctx = document.getElementById('budgetChart').getContext('2d');
-      budgetChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Main Invitations', 'Save the Dates', 'Day-of Stationery', 'Postage & Assembly', 'Embellishments'],
-          datasets: [{
-            data: [1400, 450, 650, 350, 350],
-            backgroundColor: [
-              '#B76E79', // Rose Gold
-              '#3b82f6', // Blue
-              '#10b981', // Green
-              '#8b5cf6', // Purple
-              isDark ? '#374151' : '#e5e7eb'  // Gray (Embellishments)
-            ],
-            borderWidth: 0,
-            hoverOffset: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { 
-              position: 'bottom', 
-              labels: { 
-                color: textColor, 
-                padding: 20, 
-                usePointStyle: true 
-              } 
-            },
-            tooltip: {
-              backgroundColor: isDark ? '#1f2937' : '#fff',
-              titleColor: isDark ? '#fff' : '#111',
-              bodyColor: isDark ? '#ccc' : '#444',
-              borderColor: isDark ? '#374151' : '#e5e7eb',
-              borderWidth: 1,
-              callbacks: {
-                label: function(context) {
-                  let label = context.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.parsed !== null) {
-                    label += '$' + context.parsed;
-                  }
-                  return label;
-                }
-              }
-            }
-          },
-          cutout: '70%' // Thinner ring
-        }
-      });
-    }
-
-    function updateCharts(isDark) {
-      const textColor = isDark ? '#9ca3af' : '#4b5563';
-      
-      if(budgetChart) {
-        budgetChart.options.plugins.legend.labels.color = textColor;
-        budgetChart.options.plugins.tooltip.backgroundColor = isDark ? '#1f2937' : '#fff';
-        budgetChart.options.plugins.tooltip.titleColor = isDark ? '#fff' : '#111';
-        budgetChart.options.plugins.tooltip.bodyColor = isDark ? '#ccc' : '#444';
-        
-        // Update Remaining Color based on mode
-        budgetChart.data.datasets[0].backgroundColor[4] = isDark ? '#374151' : '#e5e7eb';
-        
-        budgetChart.update();
-      }
-    }
-
-    window.addEventListener('load', initCharts);
-    
-    // Handle Window Resize
+    // Handle Window Resize for Sidebar
     window.addEventListener('resize', () => {
        if (window.innerWidth >= 1024) {
          sidebar.classList.remove('sidebar-closed');
          overlay.classList.add('hidden', 'opacity-0');
        }
     });
-
   </script>
 </body>
 </html>
