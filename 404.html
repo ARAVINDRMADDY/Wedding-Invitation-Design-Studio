@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Page Not Found - Design Studio</title>
+  <link rel="icon" type="image/jpeg" href="images\d7b64de7-7e0e-4dfa-a821-3c04a0161ed5.png">
+  <meta name="description" content="The page you are looking for could not be found.">
+  <script src="tailwind.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = { 
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            rosegold: '#B76E79',
+            'rosegold-hover': '#9f5c66',
+            'dark-gray': '#3A3A3A',
+            'soft-pink': '#FFF1F0',
+            white: '#FFFFFF'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    [dir="rtl"] { direction: rtl; }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeInUp 0.8s ease-out; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+  </style>
+</head>
+<body class="font-sans antialiased transition-colors duration-300 bg-white dark:bg-dark-gray flex flex-col min-h-screen">
+  <main class="flex-grow pt-20 flex flex-col items-center justify-center bg-soft-pink/20 dark:bg-[#151515] relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10" style="background-image: radial-gradient(circle at 50% 50%, #B76E79 0%, transparent 40%);"></div>
+    <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-rosegold rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-40 h-40 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in relative z-10 py-16">
+
+      <h1 class="text-8xl md:text-[10rem] font-extrabold text-dark-gray dark:text-white mb-2 tracking-tighter leading-none drop-shadow-sm">
+        4<span class="text-rosegold">0</span>4
+      </h1>
+
+      <h2 class="text-3xl md:text-4xl font-normal text-dark-gray dark:text-white mb-6 font-serif italic">
+        Looks like this envelope is empty...
+      </h2>
+
+      <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-xl mx-auto">
+        The design or page you are looking for might have been moved, renamed, or is temporarily unavailable. Let's guide you back to our curated collections.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="index.html" class="w-full sm:w-auto px-8 py-4 bg-rosegold hover:bg-rosegold-hover text-white rounded-full font-bold transition-all duration-300 shadow-lg transform hover:-translate-y-1 flex items-center justify-center">
+          <i class="fas fa-home mr-2"></i> Return Home
+        </a>
+        <a href="collections.html" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-[#2A2A2A] hover:bg-gray-50 dark:hover:bg-[#333] text-dark-gray dark:text-white border border-gray-200 dark:border-gray-700 rounded-full font-bold transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center shadow-sm">
+          Browse Collections
+        </a>
+      </div>
+      
+    </div>
+  </main>
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const html = document.documentElement;
+
+    function toggleTheme() {
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+    if (localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+
+    // RTL Toggle
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+
+    function toggleRTL() {
+      if (html.getAttribute('dir') === 'rtl') {
+        html.removeAttribute('dir');
+        localStorage.setItem('direction', 'ltr');
+      } else {
+        html.setAttribute('dir', 'rtl');
+        localStorage.setItem('direction', 'rtl');
+      }
+    }
+
+    if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+    if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+    if (localStorage.getItem('direction') === 'rtl') html.setAttribute('dir', 'rtl');
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Mobile Dropdowns Toggle Function
+    function setupMobileDropdown(dropdownId, menuId, iconId) {
+      const dropdown = document.getElementById(dropdownId);
+      const menu = document.getElementById(menuId);
+      const icon = document.getElementById(iconId);
+      
+      if(dropdown && menu && icon) {
+        dropdown.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+          icon.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+      }
+    }
+
+    // Initialize dropdowns
+    setupMobileDropdown('mobile-home-dropdown', 'mobile-home-menu', 'mobile-home-icon');
+    setupMobileDropdown('mobile-dashboard-dropdown', 'mobile-dashboard-menu', 'mobile-dashboard-icon');
+
+  </script>
+</body>
+</html>
